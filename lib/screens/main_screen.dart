@@ -1,23 +1,36 @@
 import 'package:flutter/material.dart';
+import '../data/cart_data.dart';
 import 'package:restaurant_mobile_app/screens/cart_screen.dart';
 import 'package:restaurant_mobile_app/screens/home_screen.dart';
-import '../data/cart_data.dart';
+import 'package:restaurant_mobile_app/screens/saved_screen.dart';
+import 'package:restaurant_mobile_app/screens/order_screen.dart';
+
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final int initialIndex;
+
+  const MainScreen({super.key, this.initialIndex = 0});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _selectedIndex = 0;
+  late int _selectedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedIndex = widget.initialIndex;
+  }
+
+  // int _selectedIndex = 0;
 
   final List<Widget> _pages = const [
     HomeScreen(),
-    Center(child: Text("Saved Screen")),
+    SavedScreen(),
     CartScreen(),
-    Center(child: Text("Orders Screen")),
+    OrderScreen(),
     Center(child: Text("Profile Screen")),
   ];
 

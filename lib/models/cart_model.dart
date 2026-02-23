@@ -4,10 +4,7 @@ class CartItem {
   final String name;
   final double price;
 
-  CartItem({
-    required this.name,
-    required this.price,
-  });
+  CartItem({required this.name, required this.price});
 }
 
 class CartModel extends ChangeNotifier {
@@ -20,13 +17,12 @@ class CartModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeItem(CartItem item) {
-    _items.remove(item);
+  void clearCart() {
+    _items.clear();
     notifyListeners();
   }
 
   double get totalPrice {
-    return _items.fold(
-        0, (sum, item) => sum + item.price);
+    return _items.fold(0, (sum, item) => sum + item.price);
   }
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/cart_data.dart';
+import 'checkout_screen.dart';
+
 
 class CartScreen extends StatefulWidget {
   const CartScreen({super.key});
@@ -70,28 +72,59 @@ class _CartScreenState extends State<CartScreen> {
                 ),
 
                 Container(
-                  padding: const EdgeInsets.all(16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        "Total:",
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text(
-                        "\$${cart.totalPrice.toStringAsFixed(2)}",
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.orange,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+  padding: const EdgeInsets.all(16),
+  child: Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Text(
+            "Total:",
+            style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
+          ),
+          Text(
+            "\$${cart.totalPrice.toStringAsFixed(2)}",
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.orange,
+            ),
+          ),
+        ],
+      ),
+
+      const SizedBox(height: 16),
+
+      SizedBox(
+        width: double.infinity,
+        child: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.orange,
+            padding:
+                const EdgeInsets.symmetric(vertical: 14),
+            shape: RoundedRectangleBorder(
+              borderRadius:
+                  BorderRadius.circular(16),
+            ),
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) =>
+                    const CheckoutScreen(),
+              ),
+            );
+          },
+          child: const Text("Checkout"),
+        ),
+      ),
+    ],
+  ),
+),
+
               ],
             ),
     );

@@ -8,11 +8,7 @@ class CartItem {
   final double price;
   int quantity;
 
-  CartItem({
-    required this.name,
-    required this.price,
-    this.quantity = 1,
-  });
+  CartItem({required this.name, required this.price, this.quantity = 1});
 }
 
 class CartModel extends ChangeNotifier {
@@ -21,8 +17,7 @@ class CartModel extends ChangeNotifier {
   List<CartItem> get items => _items;
 
   void addItem(String name, double price) {
-    final index =
-        _items.indexWhere((item) => item.name == name);
+    final index = _items.indexWhere((item) => item.name == name);
 
     if (index >= 0) {
       _items[index].quantity++;
@@ -47,14 +42,15 @@ class CartModel extends ChangeNotifier {
   }
 
   double get totalPrice {
-    return _items.fold(
-        0,
-        (sum, item) =>
-            sum + (item.price * item.quantity));
+    return _items.fold(0, (sum, item) => sum + (item.price * item.quantity));
   }
 
   int get totalItems {
-    return _items.fold(
-        0, (sum, item) => sum + item.quantity);
+    return _items.fold(0, (sum, item) => sum + item.quantity);
+  }
+
+  void clearCart() {
+    _items.clear();
+    notifyListeners();
   }
 }

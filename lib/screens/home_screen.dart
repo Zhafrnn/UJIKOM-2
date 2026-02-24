@@ -59,13 +59,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Deliver to",
-                          style: TextStyle(color: Colors.grey)),
+                      Text("Deliver to", style: TextStyle(color: Colors.grey)),
                       SizedBox(height: 4),
                       Text(
                         "New York, USA",
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                        ),
                       ),
                     ],
                   ),
@@ -105,8 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefixIcon: const Icon(Icons.search),
                   filled: true,
                   fillColor: Colors.grey.shade200,
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 0),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(30),
                     borderSide: BorderSide.none,
@@ -154,8 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const Text(
                 "Categories",
-                style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 16),
@@ -177,33 +176,55 @@ class _HomeScreenState extends State<HomeScreen> {
 
               const Text(
                 "Popular Restaurants",
-                style:
-                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 16),
 
               // 🔥 RESTAURANT LIST (FILTERED)
-              ...filteredRestaurants.map((restaurant) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 16),
-                  child: RestaurantCard(
-                    name: restaurant["name"],
-                    category: restaurant["category"],
-                    priceRange: restaurant["priceRange"],
-                    rating: restaurant["rating"],
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              const RestaurantDetailScreen(),
+              if (filteredRestaurants.isEmpty) ...[
+                const SizedBox(height: 40),
+                Center(
+                  child: Column(
+                    children: [
+                      const Icon(
+                        Icons.search_off,
+                        size: 60,
+                        color: Colors.grey,
+                      ),
+                      const SizedBox(height: 16),
+                      const Text(
+                        "No restaurants found",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey,
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   ),
-                );
-              }).toList(),
+                ),
+              ] else ...[
+                ...filteredRestaurants.map((restaurant) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: RestaurantCard(
+                      name: restaurant["name"],
+                      category: restaurant["category"],
+                      priceRange: restaurant["priceRange"],
+                      rating: restaurant["rating"],
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const RestaurantDetailScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }).toList(),
+              ],
 
               const SizedBox(height: 100),
             ],

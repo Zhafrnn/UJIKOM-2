@@ -20,18 +20,8 @@ class _HomeScreenState extends State<HomeScreen> {
       "priceRange": "\$10 - \$50",
       "rating": 4.5,
     },
-    {
-      "name": "Mas Anto - Ayam & Bebek Goreng",
-      "category": "Ayam Goreng",
-      "priceRange": "\$10 - \$50",
-      "rating": 4.5,
-    },
-    {
-      "name": "Mas Bambang - Ayam & Bebek Goreng",
-      "category": "Bebek Goreng",
-      "priceRange": "\$10 - \$50",
-      "rating": 4.5,
-    },
+    // BISA DITAMBAHKAN SENDIRI
+    
   ];
 
   @override

@@ -30,7 +30,7 @@ class _SavedScreenState extends State<SavedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Saved"),
+        title: const Text("My Favorite"),
       ),
       body: saved.items.isEmpty
           ? const Center(

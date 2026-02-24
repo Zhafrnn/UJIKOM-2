@@ -1,12 +1,48 @@
 import 'package:flutter/material.dart';
 import '../widgets/restaurant_card.dart';
 import 'restaurant_detail_screen.dart';
+import 'package:restaurant_mobile_app/screens/profile_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  String searchQuery = "";
+
+  final List<Map<String, dynamic>> restaurants = [
+    {
+      "name": "McDonald's",
+      "category": "Burger",
+      "priceRange": "\$10 - \$50",
+      "rating": 4.5,
+    },
+    {
+      "name": "Mas Anto - Ayam & Bebek Goreng",
+      "category": "Ayam Goreng",
+      "priceRange": "\$10 - \$50",
+      "rating": 4.5,
+    },
+    {
+      "name": "Mas Bambang - Ayam & Bebek Goreng",
+      "category": "Bebek Goreng",
+      "priceRange": "\$10 - \$50",
+      "rating": 4.5,
+    },
+  ];
+
+  @override
   Widget build(BuildContext context) {
+    final filteredRestaurants = restaurants.where((restaurant) {
+      final name = restaurant["name"].toString().toLowerCase();
+      final category = restaurant["category"].toString().toLowerCase();
+      return name.contains(searchQuery.toLowerCase()) ||
+          category.contains(searchQuery.toLowerCase());
+    }).toList();
+
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
@@ -15,6 +51,7 @@ class HomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(height: 20),
+
               // 🔹 HEADER
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -22,21 +59,34 @@ class HomeScreen extends StatelessWidget {
                   const Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Deliver to", style: TextStyle(color: Colors.grey)),
+                      Text("Deliver to",
+                          style: TextStyle(color: Colors.grey)),
                       SizedBox(height: 4),
                       Text(
                         "New York, USA",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+                            fontWeight: FontWeight.bold, fontSize: 16),
                       ),
                     ],
                   ),
-                  CircleAvatar(
-                    radius: 22,
-                    backgroundColor: Colors.grey[300],
-                    child: const Icon(Icons.person),
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ProfileScreen(),
+                        ),
+                      );
+                    },
+                    child: const CircleAvatar(
+                      radius: 28,
+                      backgroundColor: Color(0xFFE0E0E0),
+                      child: Icon(
+                        Icons.person,
+                        size: 28,
+                        color: Color(0xFF5E35B1),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -44,17 +94,22 @@ class HomeScreen extends StatelessWidget {
               const SizedBox(height: 20),
 
               // 🔹 SEARCH BAR
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(30),
-                ),
-                child: const TextField(
-                  decoration: InputDecoration(
-                    icon: Icon(Icons.search),
-                    hintText: "Search restaurant...",
-                    border: InputBorder.none,
+              TextField(
+                onChanged: (value) {
+                  setState(() {
+                    searchQuery = value;
+                  });
+                },
+                decoration: InputDecoration(
+                  hintText: "Search restaurant...",
+                  prefixIcon: const Icon(Icons.search),
+                  filled: true,
+                  fillColor: Colors.grey.shade200,
+                  contentPadding:
+                      const EdgeInsets.symmetric(vertical: 0),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(30),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -97,15 +152,14 @@ class HomeScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // 🔹 CATEGORY TITLE
               const Text(
                 "Categories",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 16),
 
-              // 🔹 CATEGORY LIST
               SizedBox(
                 height: 90,
                 child: ListView(
@@ -121,64 +175,35 @@ class HomeScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // 🔹 RESTAURANT TITLE
               const Text(
                 "Popular Restaurants",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style:
+                    TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
 
               const SizedBox(height: 16),
 
-              RestaurantCard(
-                name: "McDonald's",
-                category: "Burger",
-                priceRange: "\$10 - \$50",
-                rating: 4.5,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const RestaurantDetailScreen(),
-                    ),
-                  );
-                },
-              ),
-
-              const SizedBox(height: 16),
-
-              RestaurantCard(
-                name: "Mas Anto - Ayam & Bebek Goreng",
-                category: "Ayam Goreng",
-                priceRange: "\$10 - \$50",
-                rating: 4.5,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const RestaurantDetailScreen(),
-                    ),
-                  );
-                },
-              ),
-
-              const SizedBox(height: 16),
-
-              RestaurantCard(
-                name: "Mas Bambang  - Ayam & Bebek Goreng",
-                category: "Bebek Goreng",
-                priceRange: "\$10 - \$50",
-                rating: 4.5,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => const RestaurantDetailScreen(),
-                    ),
-                  );
-                },
-              ),
-
-              // BISA DITAMBAH LAGI SAMPAI BANYAK BANGET
+              // 🔥 RESTAURANT LIST (FILTERED)
+              ...filteredRestaurants.map((restaurant) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: RestaurantCard(
+                    name: restaurant["name"],
+                    category: restaurant["category"],
+                    priceRange: restaurant["priceRange"],
+                    rating: restaurant["rating"],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) =>
+                              const RestaurantDetailScreen(),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              }).toList(),
 
               const SizedBox(height: 100),
             ],
@@ -204,60 +229,6 @@ class HomeScreen extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text(title),
-        ],
-      ),
-    );
-  }
-
-  Widget _restaurantCard() {
-    return Container(
-      height: 180,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8),
-        ],
-      ),
-      child: Column(
-        children: [
-          Expanded(
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.grey,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "McDonald's",
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 4),
-                    Text(
-                      "Burger • 4.5 ⭐",
-                      style: TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-                Text(
-                  "\$10 - \$50",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.orange,
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );

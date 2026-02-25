@@ -86,8 +86,8 @@ class _RestaurantCardState extends State<RestaurantCard>
 
             /// ❤️ FAVORITE BUTTON WITH ANIMATION
             Positioned(
-              top: 15,
-              right: 15,
+              top: 12,
+              right: 12,
               child: GestureDetector(
                 onTap: () {
                   saved.toggleSaved(
@@ -98,19 +98,29 @@ class _RestaurantCardState extends State<RestaurantCard>
                     imagePath: widget.imagePath,
                   );
                 },
-                child: AnimatedScale(
-                  scale: isSaved ? 1.2 : 1.0,
-                  duration: const Duration(milliseconds: 200),
-                  child: AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 200),
-                    transitionBuilder: (child, animation) =>
-                        ScaleTransition(scale: animation, child: child),
-                    child: Icon(
-                      isSaved ? Icons.favorite : Icons.favorite_border,
-                      key: ValueKey(isSaved),
-                      color: isSaved ? Colors.red : Colors.grey,
-                      size: 26,
-                    ),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: saved.isSaved(widget.name)
+                        ? Colors.red.withOpacity(0.15)
+                        : Colors.white.withOpacity(0.9),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.1),
+                        blurRadius: 6,
+                        offset: Offset(0, 2),
+                      ),
+                    ],
+                  ),
+                  child: Icon(
+                    saved.isSaved(widget.name)
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: saved.isSaved(widget.name)
+                        ? Colors.red
+                        : Colors.grey,
+                    size: 22,
                   ),
                 ),
               ),

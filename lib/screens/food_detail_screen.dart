@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_mobile_app/models/cart_model.dart';
+// import 'package:restaurant_mobile_app/models/cart_model.dart';
 import '../data/cart_data.dart';
 
 class FoodDetailScreen extends StatelessWidget {

@@ -2,96 +2,105 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_mobile_app/screens/order_screen.dart';
 import '../data/user_data.dart';
 import 'edit_profile_screen.dart';
-import 'setting_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+
+class SettingScreen extends StatelessWidget {
+  const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Profile"),
-        centerTitle: false,
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        title: const Text("Settings"),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             const SizedBox(height: 30),
 
-            // 🔥 USER INFO (Reactive)
+            // 🔥 USER INFO (REACTIVE)
             AnimatedBuilder(
               animation: user,
               builder: (context, _) {
                 return Column(
                   children: [
                     const CircleAvatar(
-                      radius: 60,
+                      radius: 50,
                       backgroundColor: Colors.orange,
-                      child: Icon(Icons.person, size: 60, color: Colors.white),
+                      child: Icon(
+                        Icons.person,
+                        size: 50,
+                        color: Colors.white,
+                      ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 16),
                     Text(
                       user.name,
                       style: const TextStyle(
-                        fontSize: 22,
+                        fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(height: 6),
+                    const SizedBox(height: 4),
                     Text(
                       user.email,
-                      style: const TextStyle(color: Colors.grey, fontSize: 16),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ],
                 );
               },
             ),
 
-            const SizedBox(height: 12),
-
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const EditProfileScreen()),
-                );
-              },
-              child: const Text(
-                "Edit Profile",
-                style: TextStyle(color: Colors.orange),
-              ),
-            ),
-
             const SizedBox(height: 30),
 
-            // 🔹 MENU LIST
-            _buildMenuItem(context, Icons.location_on_outlined, "My Address"),
-            _buildMenuItem(context, Icons.credit_card, "Payment Methods"),
+            _buildMenuItem(
+              context,
+              Icons.person_outline,
+              "Edit Profile",
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const EditProfileScreen(),
+                  ),
+                );
+              },
+            ),
+
+            _buildMenuItem(
+              context,
+              Icons.location_on_outlined,
+              "My Address",
+              () {},
+            ),
+
+            _buildMenuItem(
+              context,
+              Icons.credit_card,
+              "Payment Methods",
+              () {},
+            ),
+
             _buildMenuItem(
               context,
               Icons.history,
               "Order History",
-              onTap: () {
+              () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (_) => const OrderScreen()),
+                  MaterialPageRoute(
+                    builder: (_) => const OrderScreen(),
+                  ),
                 );
               },
             ),
+
             _buildMenuItem(
               context,
-              Icons.settings,
-              "Settings",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const SettingScreen()),
-                );
-              },
+              Icons.logout,
+              "Logout",
+              () {},
+              isLogout: true,
             ),
 
             const SizedBox(height: 40),
@@ -104,8 +113,9 @@ class ProfileScreen extends StatelessWidget {
   Widget _buildMenuItem(
     BuildContext context,
     IconData icon,
-    String title, {
-    VoidCallback? onTap,
+    String title,
+    VoidCallback onTap, {
+    bool isLogout = false,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -120,10 +130,16 @@ class ProfileScreen extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(icon, color: Colors.orange),
+              Icon(icon, color: isLogout ? Colors.red : Colors.orange),
               const SizedBox(width: 20),
               Expanded(
-                child: Text(title, style: const TextStyle(fontSize: 16)),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: isLogout ? Colors.red : Colors.black,
+                  ),
+                ),
               ),
               const Icon(Icons.chevron_right),
             ],

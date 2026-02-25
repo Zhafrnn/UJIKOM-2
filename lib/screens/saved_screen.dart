@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import '../data/saved_data.dart';
+import '../widgets/restaurant_card.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});
 
   @override
-  State<SavedScreen> createState() =>
-      _SavedScreenState();
+  State<SavedScreen> createState() => _SavedScreenState();
 }
 
 class _SavedScreenState extends State<SavedScreen> {
@@ -28,28 +28,25 @@ class _SavedScreenState extends State<SavedScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final items = saved.items;
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Favorite"),
-      ),
-      body: saved.items.isEmpty
-          ? const Center(
-              child: Text("No saved items"),
-            )
+      appBar: AppBar(title: const Text("My Favorite")),
+      body: items.isEmpty
+          ? const Center(child: Text("No saved items"))
           : ListView.builder(
-              itemCount: saved.items.length,
+              padding: const EdgeInsets.all(16),
+              itemCount: items.length,
               itemBuilder: (context, index) {
-                final item = saved.items[index];
-                return ListTile(
-                  title: Text(item.name),
-                  subtitle: Text(item.category),
-                  trailing: IconButton(
-                    icon: const Icon(Icons.delete),
-                    onPressed: () {
-                      saved.toggleSaved(
-                          item.name, item.category);
-                    },
-                  ),
+                final item = items[index];
+
+                return RestaurantCard(
+                  name: item.name,
+                  category: item.category,
+                  priceRange: item.priceRange,
+                  rating: item.rating,
+                  imagePath: item.imagePath,
+                  onTap: () {},
                 );
               },
             ),

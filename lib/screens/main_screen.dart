@@ -4,7 +4,8 @@ import 'package:restaurant_mobile_app/screens/cart_screen.dart';
 import 'package:restaurant_mobile_app/screens/home_screen.dart';
 import 'package:restaurant_mobile_app/screens/saved_screen.dart';
 import 'package:restaurant_mobile_app/screens/order_screen.dart';
-import 'package:restaurant_mobile_app/screens/profile_screen.dart';
+// import 'package:restaurant_mobile_app/screens/profile_screen.dart';
+import 'setting_screen.dart';
 
 class MainScreen extends StatefulWidget {
   final int initialIndex;
@@ -31,7 +32,8 @@ class _MainScreenState extends State<MainScreen> {
     SavedScreen(),
     CartScreen(),
     OrderScreen(),
-    ProfileScreen(),
+    // ProfileScreen(),
+    SettingScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -116,10 +118,10 @@ class _MainScreenState extends State<MainScreen> {
                 onPressed: () => _onItemTapped(3),
               ),
 
-              // Profile
+              // Setting
               IconButton(
                 icon: Icon(
-                  Icons.person_outline,
+                  Icons.settings_outlined,
                   color: _selectedIndex == 4 ? Colors.orange : Colors.grey,
                 ),
                 onPressed: () => _onItemTapped(4),

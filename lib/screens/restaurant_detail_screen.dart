@@ -3,68 +3,92 @@ import '../widgets/food_card.dart';
 import 'food_detail_screen.dart';
 
 class RestaurantDetailScreen extends StatelessWidget {
-  const RestaurantDetailScreen({super.key});
+  final String name;
+  final String category;
+  final double rating;
+  final String priceRange;
+  final String imagePath;
+
+  const RestaurantDetailScreen({
+    super.key,
+    required this.name,
+    required this.category,
+    required this.rating,
+    required this.priceRange,
+    required this.imagePath,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: IconButton(
-                icon: Icon(Icons.arrow_back),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // 🔥 BACK BUTTON
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
                 onPressed: () {
                   Navigator.pop(context);
                 },
               ),
-            ),
-            // 🔥 HEADER IMAGE
-            Container(height: 220, width: double.infinity, color: Colors.grey),
 
-            const SizedBox(height: 16),
-
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "McDonald's",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    "Burger • 4.5 ⭐ • \$10 - \$50",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
+              // 🔥 HEADER IMAGE
+              Image.asset(
+                imagePath,
+                height: 200,
+                width: double.infinity,
+                fit: BoxFit.cover,
               ),
-            ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
-            // 🔥 CATEGORY MINI TAB
-            SizedBox(
-              height: 40,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
+              // 🔥 RESTAURANT INFO
+              Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                children: [
-                  _miniCategory("Burger", true),
-                  _miniCategory("Drinks", false),
-                  _miniCategory("Dessert", false),
-                ],
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      "$category • ${rating.toStringAsFixed(1)} ⭐ • $priceRange",
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
-            ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            // 🔥 FOOD GRID
-            Expanded(
-              child: GridView.builder(
+              // 🔥 CATEGORY MINI TAB
+              SizedBox(
+                height: 40,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  children: [
+                    _miniCategory("Burger", true),
+                    _miniCategory("Drinks", false),
+                    _miniCategory("Dessert", false),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 20),
+
+              // 🔥 FOOD GRID (TIDAK SCROLL SENDIRI)
+              GridView.builder(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
+                shrinkWrap: true, // ✅ penting
+                physics: const NeverScrollableScrollPhysics(), // ✅ penting
                 itemCount: 6,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
@@ -87,8 +111,10 @@ class RestaurantDetailScreen extends StatelessWidget {
                   );
                 },
               ),
-            ),
-          ],
+
+              const SizedBox(height: 30),
+            ],
+          ),
         ),
       ),
     );

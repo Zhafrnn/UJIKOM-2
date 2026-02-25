@@ -207,7 +207,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const RestaurantDetailScreen(),
+                            builder: (_) => RestaurantDetailScreen(
+                              name: restaurant["name"],
+                              category: restaurant["category"],
+                              rating: restaurant["rating"],
+                              priceRange: restaurant["priceRange"],
+                              imagePath: restaurant["imagePath"],
+                            ),
                           ),
                         );
                       },

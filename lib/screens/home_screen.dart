@@ -3,6 +3,7 @@ import '../widgets/restaurant_card.dart';
 import 'restaurant_detail_screen.dart';
 import 'profile_screen.dart';
 import 'menu_screen.dart';
+import '../widgets/promo_carousel.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -100,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Icon(
                           Icons.person,
                           size: 28,
-                          color: Color(0xFF5E35B1),
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -132,34 +133,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
 
                 /// 🔹 PROMO BANNER (IMAGE VERSION)
-                SizedBox(
-                  height: 160,
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: [
-                      _promoBanner(
-                        "50% OFF",
-                        "On all Burgers",
-                        "assets/Burger_Promo.jpg",
-                      ),
-                      _promoBanner(
-                        "Buy 1 Get 1",
-                        "For Pizza Lovers",
-                        "assets/Pizza_Promo.jpg",
-                      ),
-                      _promoBanner(
-                        "Free Drink",
-                        "Min order \$25",
-                        "assets/Drink_Promo.jpg",
-                      ),
-                      _promoBanner(
-                        "Buy 5 Get Free Desert",
-                        "Min order \$35",
-                        "assets/Desert_Promo.jpg",
-                      ),
-                    ],
-                  ),
-                ),
+                const SizedBox(height: 20),
+
+                SizedBox(height: 170, child: PromoCarousel()),
 
                 const SizedBox(height: 24),
 

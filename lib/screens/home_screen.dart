@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../widgets/restaurant_card.dart';
 import 'restaurant_detail_screen.dart';
 import 'profile_screen.dart';
+import 'menu_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,10 +17,31 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> restaurants = [
     {
       "name": "McDonald's",
-      "category": "Burger",
-      "priceRange": "\$10 - \$50",
+      "category": "Burger & Chicken",
+      "priceRange": "\$25 - \$60",
       "rating": 4.5,
       "imagePath": "assets/Mc_Donald's.jpg",
+    },
+    {
+      "name": "Burger King",
+      "category": "Burger & Fried Fries",
+      "priceRange": "\$10 - \$30",
+      "rating": 4.5,
+      "imagePath": "assets/Burger_King.jpg",
+    },
+    {
+      "name": "KFC",
+      "category": "Fried Chicken",
+      "priceRange": "\$15 - \$35",
+      "rating": 4.5,
+      "imagePath": "assets/KFC.jpg",
+    },
+    {
+      "name": "Pizza Hut",
+      "category": "Pizza & Soda",
+      "priceRange": "\$10 - \$50",
+      "rating": 4.5,
+      "imagePath": "assets/Pizza_Hut.jpg",
     },
   ];
   @override
@@ -109,37 +131,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 const SizedBox(height: 20),
 
-                /// 🔹 PROMO BANNER
-                Container(
-                  height: 140,
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: const LinearGradient(
-                      colors: [Color(0xFFFF7043), Color(0xFFFF5722)],
-                    ),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Special Offer",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 8),
-                        Text(
-                          "Get 30% discount today",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    ),
+                /// 🔹 PROMO BANNER (IMAGE VERSION)
+                SizedBox(
+                  height: 160,
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: [
+                      _promoBanner(
+                        "50% OFF",
+                        "On all Burgers",
+                        "assets/Burger_Promo.jpg",
+                      ),
+                      _promoBanner(
+                        "Buy 1 Get 1",
+                        "For Pizza Lovers",
+                        "assets/Pizza_Promo.jpg",
+                      ),
+                      _promoBanner(
+                        "Free Drink",
+                        "Min order \$25",
+                        "assets/Drink_Promo.jpg",
+                      ),
+                      _promoBanner(
+                        "Buy 5 Get Free Desert",
+                        "Min order \$35",
+                        "assets/Desert_Promo.jpg",
+                      ),
+                    ],
                   ),
                 ),
 
@@ -153,7 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 16),
 
                 SizedBox(
-                  height: 90,
+                  height: 110,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -161,6 +179,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       _categoryItem("Pizza", Icons.local_pizza),
                       _categoryItem("Drinks", Icons.local_drink),
                       _categoryItem("Dessert", Icons.icecream),
+                      _categoryItem("Chicken", Icons.set_meal),
+                      _categoryItem("Coffee", Icons.coffee),
+                      _categoryItem("Noodles", Icons.ramen_dining),
+                      _categoryItem("Steak", Icons.restaurant),
                     ],
                   ),
                 ),
@@ -220,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }).toList(),
 
-                const SizedBox(height: 100),
+                const SizedBox(height: 50),
               ],
             ),
           ),
@@ -230,23 +252,65 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _categoryItem(String title, IconData icon) {
-    return Padding(
-      padding: const EdgeInsets.only(right: 16),
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              color: Colors.orange[100],
-              borderRadius: BorderRadius.circular(20),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => MenuScreen(category: title)),
+        );
+      },
+      child: Padding(
+        padding: const EdgeInsets.only(right: 16),
+        child: Column(
+          children: [
+            Container(
+              height: 70,
+              width: 70,
+              decoration: BoxDecoration(
+                color: Colors.orange[100],
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Icon(icon, color: Colors.orange, size: 30),
             ),
-            child: Icon(icon, color: Colors.orange),
-          ),
-          const SizedBox(height: 8),
-          Text(title),
-        ],
+            const SizedBox(height: 8),
+            Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
+          ],
+        ),
       ),
     );
   }
+}
+
+Widget _promoBanner(String title, String subtitle, String imagePath) {
+  return Container(
+    width: 280,
+    margin: const EdgeInsets.only(right: 16),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(20),
+      image: DecorationImage(image: AssetImage(imagePath), fit: BoxFit.cover),
+    ),
+    child: Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.black.withOpacity(0.45),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 6),
+          Text(subtitle, style: const TextStyle(color: Colors.white70)),
+        ],
+      ),
+    ),
+  );
 }

@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class FoodCard extends StatelessWidget {
   final String name;
   final String price;
+  final String image;
   final VoidCallback onTap;
 
   const FoodCard({
     super.key,
     required this.name,
     required this.price,
+    required this.image,
     required this.onTap,
   });
 
@@ -21,22 +23,21 @@ class FoodCard extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.05),
-              blurRadius: 6,
-            )
+            BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 6),
           ],
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.grey,
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
+              child: ClipRRect(
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+                child: Image.asset(
+                  image,
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
               ),
             ),
@@ -47,19 +48,19 @@ class FoodCard extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     price,
                     style: const TextStyle(
-                        color: Colors.orange,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.orange,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

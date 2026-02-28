@@ -22,6 +22,8 @@ class _HomeScreenState extends State<HomeScreen> {
       "priceRange": "\$25 - \$60",
       "rating": 4.5,
       "imagePath": "assets/Mc_Donald's.jpg",
+      "description":
+          "Famous fast-food restaurant serving burgers, fries, chicken, and refreshing drinks. Open daily 09:00 - 23:00.",
     },
     {
       "name": "Burger King",
@@ -211,6 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
                               rating: restaurant["rating"],
                               priceRange: restaurant["priceRange"],
                               imagePath: restaurant["imagePath"],
+                              description:
+                                  restaurant["description"] ??
+                                  "No description available",
                             ),
                           ),
                         );

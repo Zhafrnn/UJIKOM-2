@@ -5,17 +5,10 @@ class OrderScreen extends StatefulWidget {
   const OrderScreen({super.key});
 
   @override
-  State<OrderScreen> createState() => _OrdersScreenState();
+  State<OrderScreen> createState() => _OrderScreenState();
 }
 
-class _OrdersScreenState extends State<OrderScreen> {
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    setState(() {});
-  }
-
+class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     final orders = orderData.orders;
@@ -58,16 +51,46 @@ class _OrdersScreenState extends State<OrderScreen> {
                         Text(
                           "Date: ${order.date.toLocal().toString().split(' ')[0]}",
                         ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Items: ${order.items.length}",
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Total: \$${order.total.toStringAsFixed(2)}",
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.orange,
+                        const SizedBox(height: 12),
+
+                        ...order.items.map((item) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.asset(
+                                    item.imagePath,
+                                    width: 50,
+                                    height: 50,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    "${item.name} x${item.quantity}",
+                                  ),
+                                ),
+                                Text(
+                                  "\$${(item.price * item.quantity).toStringAsFixed(2)}",
+                                ),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+
+                        const Divider(),
+
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            "Total: \$${order.total.toStringAsFixed(2)}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.orange,
+                            ),
                           ),
                         ),
                       ],

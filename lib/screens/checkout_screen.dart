@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../data/cart_data.dart';
 import '../data/order_data.dart';
 import '../models/order_model.dart';
-import 'package:restaurant_mobile_app/screens/main_screen.dart';
+import 'main_screen.dart';
 
 class CheckoutScreen extends StatelessWidget {
   const CheckoutScreen({super.key});
@@ -19,7 +19,6 @@ class CheckoutScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // 🔥 Order List
             Expanded(
               child: ListView.builder(
                 itemCount: cart.items.length,
@@ -27,6 +26,12 @@ class CheckoutScreen extends StatelessWidget {
                   final item = cart.items[index];
 
                   return ListTile(
+                    leading: Image.asset(
+                      item.imagePath,
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
                     title: Text(item.name),
                     subtitle: Text("x${item.quantity}"),
                     trailing: Text(
@@ -39,7 +44,6 @@ class CheckoutScreen extends StatelessWidget {
 
             const Divider(),
 
-            // 🔥 Summary
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -50,9 +54,12 @@ class CheckoutScreen extends StatelessWidget {
 
             const SizedBox(height: 8),
 
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [Text("Delivery Fee"), Text("\$5.00")],
+              children: [
+                Text("Delivery Fee"),
+                Text("\$5.00"),
+              ],
             ),
 
             const SizedBox(height: 12),
@@ -91,7 +98,14 @@ class CheckoutScreen extends StatelessWidget {
 
                   orderData.addOrder(
                     OrderModel(
-                      items: List.from(cart.items),
+                      items: cart.items.map((item) {
+                        return CartItem(
+                          name: item.name,
+                          price: item.price,
+                          imagePath: item.imagePath,
+                          quantity: item.quantity,
+                        );
+                      }).toList(),
                       total: total,
                       date: DateTime.now(),
                     ),
@@ -101,13 +115,11 @@ class CheckoutScreen extends StatelessWidget {
 
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                      builder: (_) =>
-                          MainScreen(initialIndex: 3), // 3 = Orders tab
+                      builder: (_) => const MainScreen(initialIndex: 3),
                     ),
                     (route) => false,
                   );
                 },
-
                 child: const Text("Place Order"),
               ),
             ),

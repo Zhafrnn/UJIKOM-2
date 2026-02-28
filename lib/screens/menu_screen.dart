@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/food_card.dart';
-import 'package:restaurant_mobile_app/models/food_item_model.dart';
+import '../models/food_item_model.dart';
 import '../data/food_data.dart';
+import '../screens/food_detail_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   final String category;
@@ -34,7 +35,15 @@ class MenuScreen extends StatelessWidget {
                 return FoodCard(
                   name: food.name,
                   price: food.price,
-                  onTap: () {},
+                  image: food.image,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => FoodDetailScreen(food: food),
+                      ),
+                    );
+                  },
                 );
               },
             ),

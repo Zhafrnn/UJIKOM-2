@@ -1,4 +1,3 @@
-import '../models/cart_model.dart';
 import 'package:flutter/material.dart';
 
 CartModel cart = CartModel();
@@ -6,9 +5,15 @@ CartModel cart = CartModel();
 class CartItem {
   final String name;
   final double price;
+  final String imagePath;
   int quantity;
 
-  CartItem({required this.name, required this.price, this.quantity = 1});
+  CartItem({
+    required this.name,
+    required this.price,
+    required this.imagePath,
+    this.quantity = 1,
+  });
 }
 
 class CartModel extends ChangeNotifier {
@@ -16,13 +21,13 @@ class CartModel extends ChangeNotifier {
 
   List<CartItem> get items => _items;
 
-  void addItem(String name, double price) {
+  void addItem(String name, double price, String imagePath) {
     final index = _items.indexWhere((item) => item.name == name);
 
     if (index >= 0) {
       _items[index].quantity++;
     } else {
-      _items.add(CartItem(name: name, price: price));
+      _items.add(CartItem(name: name, price: price, imagePath: imagePath));
     }
 
     notifyListeners();

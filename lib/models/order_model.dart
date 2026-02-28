@@ -1,4 +1,4 @@
-import 'package:restaurant_mobile_app/models/cart_model.dart';
+import '../data/cart_data.dart';
 
 class OrderModel {
   final List<CartItem> items;

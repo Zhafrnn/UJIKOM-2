@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../widgets/food_card.dart';
 import 'food_detail_screen.dart';
@@ -11,6 +11,7 @@ class RestaurantDetailScreen extends StatefulWidget {
   final double rating;
   final String priceRange;
   final String imagePath;
+  final String description;
 
   const RestaurantDetailScreen({
     super.key,
@@ -19,6 +20,7 @@ class RestaurantDetailScreen extends StatefulWidget {
     required this.rating,
     required this.priceRange,
     required this.imagePath,
+    required this.description,
   });
 
   @override
@@ -85,7 +87,15 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     "${widget.category} • ${widget.rating.toStringAsFixed(1)} ⭐ • ${widget.priceRange}",
                     style: const TextStyle(color: Colors.grey),
                   ),
+
                   const SizedBox(height: 20),
+
+                  Text(
+                    widget.description,
+                    style: const TextStyle(color: Colors.grey, height: 1.5),
+                  ),
+
+                  const SizedBox(height: 20,),
 
                   // CATEGORY LIST
                   SizedBox(
@@ -141,11 +151,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   return FoodCard(
                     name: food.name,
                     price: food.price,
+                    image: food.image,
                     onTap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const FoodDetailScreen(),
+                          builder: (_) => FoodDetailScreen(food: food),
                         ),
                       );
                     },

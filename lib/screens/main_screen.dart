@@ -124,6 +124,7 @@ class _MainScreenState extends State<MainScreen> {
           color: Colors.white,
           boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black12)],
         ),
+        
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [

@@ -4,7 +4,6 @@ import '../widgets/restaurant_card.dart';
 
 class SavedScreen extends StatefulWidget {
   const SavedScreen({super.key});
-
   @override
   State<SavedScreen> createState() => _SavedScreenState();
 }
@@ -29,7 +28,6 @@ class _SavedScreenState extends State<SavedScreen> {
   @override
   Widget build(BuildContext context) {
     final items = saved.items;
-
     return Scaffold(
       appBar: AppBar(title: const Text("My Favorite")),
       body: items.isEmpty
@@ -39,7 +37,6 @@ class _SavedScreenState extends State<SavedScreen> {
               itemCount: items.length,
               itemBuilder: (context, index) {
                 final item = items[index];
-
                 return RestaurantCard(
                   name: item.name,
                   category: item.category,

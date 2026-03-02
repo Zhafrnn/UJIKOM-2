@@ -6,6 +6,7 @@ import 'package:restaurant_mobile_app/models/food_item_model.dart';
 import 'package:restaurant_mobile_app/data/food_data.dart';
 
 class RestaurantDetailScreen extends StatefulWidget {
+  // final Restaurant restaurant;
   final String name;
   final String category;
   final double rating;
@@ -15,6 +16,7 @@ class RestaurantDetailScreen extends StatefulWidget {
 
   const RestaurantDetailScreen({
     super.key,
+    // required this.restaurant,
     required this.name,
     required this.category,
     required this.rating,
@@ -95,7 +97,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                     style: const TextStyle(color: Colors.grey, height: 1.5),
                   ),
 
-                  const SizedBox(height: 20,),
+                  const SizedBox(height: 20),
 
                   // CATEGORY LIST
                   SizedBox(

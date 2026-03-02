@@ -3,16 +3,13 @@ import 'package:restaurant_mobile_app/screens/order_screen.dart';
 import '../data/user_data.dart';
 import 'edit_profile_screen.dart';
 
-
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Settings"),
-      ),
+      appBar: AppBar(title: const Text("Settings")),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -27,11 +24,7 @@ class SettingScreen extends StatelessWidget {
                     const CircleAvatar(
                       radius: 50,
                       backgroundColor: Colors.orange,
-                      child: Icon(
-                        Icons.person,
-                        size: 50,
-                        color: Colors.white,
-                      ),
+                      child: Icon(Icons.person, size: 50, color: Colors.white),
                     ),
                     const SizedBox(height: 16),
                     Text(
@@ -53,19 +46,12 @@ class SettingScreen extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            _buildMenuItem(
-              context,
-              Icons.person_outline,
-              "Edit Profile",
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const EditProfileScreen(),
-                  ),
-                );
-              },
-            ),
+            _buildMenuItem(context, Icons.person_outline, "Edit Profile", () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const EditProfileScreen()),
+              );
+            }),
 
             _buildMenuItem(
               context,
@@ -81,19 +67,12 @@ class SettingScreen extends StatelessWidget {
               () {},
             ),
 
-            _buildMenuItem(
-              context,
-              Icons.history,
-              "Order History",
-              () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const OrderScreen(),
-                  ),
-                );
-              },
-            ),
+            _buildMenuItem(context, Icons.history, "Order History", () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const OrderScreen()),
+              );
+            }),
 
             _buildMenuItem(
               context,
@@ -125,7 +104,15 @@ class SettingScreen extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
           decoration: BoxDecoration(
-            color: Colors.grey.shade100,
+            color: Colors.white60,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 15,
+                spreadRadius: 0,
+                offset: Offset(0, 6),
+              ),
+            ],
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(

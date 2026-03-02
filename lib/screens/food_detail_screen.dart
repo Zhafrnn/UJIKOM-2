@@ -96,7 +96,7 @@ class FoodDetailScreen extends StatelessWidget {
                     ),
                   ),
                   onPressed: () {
-                    cart.addItem(food.name, priceValue);
+                    cart.addItem(food.name, priceValue, food.image);
 
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(

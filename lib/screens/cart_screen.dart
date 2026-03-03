@@ -52,7 +52,7 @@ class _CartScreenState extends State<CartScreen> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(16),
                         ),
-                        elevation: 2,
+                        elevation: 5,
                         child: Padding(
                           padding: const EdgeInsets.all(12),
                           child: Row(

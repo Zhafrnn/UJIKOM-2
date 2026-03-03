@@ -97,39 +97,51 @@ class SettingScreen extends StatelessWidget {
     bool isLogout = false,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-          decoration: BoxDecoration(
-            color: Colors.white60,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 15,
-                spreadRadius: 0,
-                offset: Offset(0, 6),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              Icon(icon, color: isLogout ? Colors.red : Colors.orange),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: isLogout ? Colors.red : Colors.black,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Card(
+        elevation: 5,
+        shadowColor: Colors.black.withOpacity(0.8),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
+            child: Row(
+              children: [
+                /// 🔹 ICON CIRCLE
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: isLogout
+                        ? Colors.red.withOpacity(0.1)
+                        : Colors.orange.withOpacity(0.1),
+                    shape: BoxShape.circle,
+                  ),
+                  child: Icon(
+                    icon,
+                    color: isLogout ? Colors.red : Colors.orange,
                   ),
                 ),
-              ),
-              const Icon(Icons.chevron_right),
-            ],
+
+                const SizedBox(width: 18),
+
+                /// 🔹 TITLE
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                      color: isLogout ? Colors.red : Colors.black,
+                    ),
+                  ),
+                ),
+
+                /// 🔹 CHEVRON
+                const Icon(Icons.chevron_right, color: Colors.grey),
+              ],
+            ),
           ),
         ),
       ),

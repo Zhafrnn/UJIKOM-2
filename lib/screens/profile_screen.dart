@@ -108,33 +108,41 @@ class ProfileScreen extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: InkWell(
-        borderRadius: BorderRadius.circular(20),
-        onTap: onTap,
-        child: Container(
-          padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
-          decoration: BoxDecoration(
-            color: Colors.white60,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.08),
-                blurRadius: 15,
-                spreadRadius: 0,
-                offset: Offset(0, 6),
-              ),
-            ],
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            children: [
-              Icon(icon, color: Colors.orange),
-              const SizedBox(width: 20),
-              Expanded(
-                child: Text(title, style: const TextStyle(fontSize: 16)),
-              ),
-              const Icon(Icons.chevron_right),
-            ],
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      child: Card(
+        elevation: 5,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        child: InkWell(
+          borderRadius: BorderRadius.circular(18),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 18, horizontal: 18),
+            child: Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: Colors.orange.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Icon(icon, color: Colors.orange),
+                ),
+
+                const SizedBox(width: 16),
+
+                Expanded(
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+
+                const Icon(Icons.chevron_right, color: Colors.grey),
+              ],
+            ),
           ),
         ),
       ),

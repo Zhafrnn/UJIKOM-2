@@ -20,12 +20,16 @@ class MyApp extends StatelessWidget {
           elevation: 0, // Hilangkan bayangan
           centerTitle: false,
           iconTheme: IconThemeData(color: Colors.black), // warna icon back
-          titleTextStyle: TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
+          titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
         ),
+
+        cardTheme: CardThemeData(
+          color: Colors.white,
+          elevation: 5,
+          shadowColor: Colors.black.withOpacity(0.8),
+        ),
+
+        textButtonTheme: TextButtonThemeData(),
       ),
       home: MainScreen(),
     );

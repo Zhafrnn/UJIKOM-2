@@ -14,15 +14,10 @@ class _OrderScreenState extends State<OrderScreen> {
     final orders = orderData.orders;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("My Orders"),
-      ),
+      appBar: AppBar(title: const Text("My Orders")),
       body: orders.isEmpty
           ? const Center(
-              child: Text(
-                "No orders yet",
-                style: TextStyle(fontSize: 16),
-              ),
+              child: Text("No orders yet", style: TextStyle(fontSize: 15)),
             )
           : ListView.builder(
               padding: const EdgeInsets.all(16),
@@ -69,9 +64,7 @@ class _OrderScreenState extends State<OrderScreen> {
                                 ),
                                 const SizedBox(width: 12),
                                 Expanded(
-                                  child: Text(
-                                    "${item.name} x${item.quantity}",
-                                  ),
+                                  child: Text("${item.name} x${item.quantity}"),
                                 ),
                                 Text(
                                   "\$${(item.price * item.quantity).toStringAsFixed(2)}",

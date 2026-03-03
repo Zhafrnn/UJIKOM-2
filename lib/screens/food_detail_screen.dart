@@ -46,41 +46,76 @@ class FoodDetailScreen extends StatelessWidget {
             const SizedBox(height: 24),
 
             /// 🔹 DETAIL
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    food.name,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                    ),
+            /// 🔹 DETAIL
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      /// 🔸 RATING
+                      Row(
+                        children: const [
+                          Icon(Icons.star, color: Colors.orange, size: 20),
+                          Icon(Icons.star, color: Colors.orange, size: 20),
+                          Icon(Icons.star, color: Colors.orange, size: 20),
+                          Icon(Icons.star, color: Colors.orange, size: 20),
+                          Icon(Icons.star_half, color: Colors.orange, size: 20),
+                          SizedBox(width: 6),
+                          Text(
+                            "4.5 (120 reviews)",
+                            style: TextStyle(color: Colors.grey),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      /// 🔸 NAMA MAKANAN
+                      Text(
+                        food.name,
+                        style: const TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      /// 🔸 HARGA
+                      Text(
+                        food.price,
+                        style: const TextStyle(
+                          fontSize: 22,
+                          color: Colors.orange,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+
+                      const SizedBox(height: 20),
+
+                      /// 🔸 DESKRIPSI PANJANG
+                      const Text(
+                        "This delicious menu is prepared using premium quality ingredients "
+                        "and cooked to perfection. Every bite delivers rich flavor, "
+                        "freshness, and satisfying texture. Perfect for lunch, dinner, "
+                        "or whenever you're craving something truly special.\n\n"
+                        "Our chefs carefully select the finest ingredients to ensure "
+                        "the best taste experience for you. Served fresh and made with love.",
+                        style: TextStyle(
+                          color: Colors.grey,
+                          height: 1.6,
+                          fontSize: 15,
+                        ),
+                      ),
+
+                      const SizedBox(height: 40),
+                    ],
                   ),
-
-                  const SizedBox(height: 8),
-
-                  Text(
-                    food.price,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.orange,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-
-                  const SizedBox(height: 12),
-
-                  const Text(
-                    "Delicious food made with high quality ingredients. Perfect for your hunger and cravings!",
-                    style: TextStyle(color: Colors.grey, height: 1.5),
-                  ),
-                ],
+                ),
               ),
             ),
-
-            const Spacer(),
 
             /// 🔹 ADD TO CART BUTTON
             Padding(
@@ -107,7 +142,7 @@ class FoodDetailScreen extends StatelessWidget {
                   },
                   child: const Text(
                     "Add To Cart",
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16, color: Colors.white),
                   ),
                 ),
               ),

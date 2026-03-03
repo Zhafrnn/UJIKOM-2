@@ -26,11 +26,16 @@ class CheckoutScreen extends StatelessWidget {
                   final item = cart.items[index];
 
                   return ListTile(
-                    leading: Image.asset(
-                      item.imagePath,
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
+                    leading: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        8,
+                      ), // tingkat kelengkungan
+                      child: Image.asset(
+                        item.imagePath,
+                        width: 50,
+                        height: 50,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     title: Text(item.name),
                     subtitle: Text("x${item.quantity}"),
@@ -56,10 +61,7 @@ class CheckoutScreen extends StatelessWidget {
 
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Delivery Fee"),
-                Text("\$5.00"),
-              ],
+              children: [Text("Delivery Fee"), Text("\$5.00")],
             ),
 
             const SizedBox(height: 12),
@@ -120,7 +122,10 @@ class CheckoutScreen extends StatelessWidget {
                     (route) => false,
                   );
                 },
-                child: const Text("Place Order"),
+                child: const Text(
+                  "Place Order",
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
               ),
             ),
           ],

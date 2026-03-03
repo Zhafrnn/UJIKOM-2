@@ -31,7 +31,9 @@ class _SavedScreenState extends State<SavedScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text("My Favorite")),
       body: items.isEmpty
-          ? const Center(child: Text("No saved items"))
+          ? const Center(
+              child: Text("No saved items", style: TextStyle(fontSize: 15)),
+            )
           : ListView.builder(
               padding: const EdgeInsets.all(16),
               itemCount: items.length,

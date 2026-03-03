@@ -34,7 +34,9 @@ class _CartScreenState extends State<CartScreen> {
         automaticallyImplyLeading: true,
       ),
       body: cart.items.isEmpty
-          ? const Center(child: Text("Cart is empty"))
+          ? const Center(
+              child: Text("Cart is empty", style: TextStyle(fontSize: 1)),
+            )
           : Column(
               children: [
                 Expanded(
@@ -42,28 +44,91 @@ class _CartScreenState extends State<CartScreen> {
                     itemCount: cart.items.length,
                     itemBuilder: (context, index) {
                       final item = cart.items[index];
-                      return ListTile(
-                        title: Text(item.name),
-                        subtitle: Text("\$${item.price.toStringAsFixed(2)}"),
-                        trailing: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            IconButton(
-                              icon: const Icon(Icons.remove),
-                              onPressed: () {
-                                cart.decreaseQuantity(item);
-                              },
-                            ),
+                      return Card(
+                        margin: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 8,
+                        ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        elevation: 2,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Row(
+                            children: [
+                              // 🔹 Gambar Produk
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.asset(
+                                  item.imagePath, // pastikan item punya field image
+                                  width: 50,
+                                  height: 50,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
 
-                            Text(item.quantity.toString()),
+                              const SizedBox(width: 12),
 
-                            IconButton(
-                              icon: const Icon(Icons.add),
-                              onPressed: () {
-                                cart.increaseQuantity(item);
-                              },
-                            ),
-                          ],
+                              // 🔹 Nama & Harga
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item.name,
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 4),
+                                    Text(
+                                      "\$${item.price.toStringAsFixed(2)}",
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              // 🔹 Quantity Control (lebih kecil)
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 4,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade100,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: Row(
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () => cart.decreaseQuantity(item),
+                                      child: const Icon(Icons.remove, size: 18),
+                                    ),
+
+                                    const SizedBox(width: 8),
+
+                                    Text(
+                                      item.quantity.toString(),
+                                      style: const TextStyle(fontSize: 14),
+                                    ),
+
+                                    const SizedBox(width: 8),
+
+                                    GestureDetector(
+                                      onTap: () => cart.increaseQuantity(item),
+                                      child: const Icon(Icons.add, size: 18),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -115,7 +180,10 @@ class _CartScreenState extends State<CartScreen> {
                               ),
                             );
                           },
-                          child: const Text("Checkout"),
+                          child: const Text(
+                            "Checkout",
+                            style: TextStyle(fontSize: 16, color: Colors.white),
+                          ),
                         ),
                       ),
                     ],

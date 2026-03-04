@@ -35,7 +35,7 @@ class _CartScreenState extends State<CartScreen> {
       ),
       body: cart.items.isEmpty
           ? const Center(
-              child: Text("Cart is empty"),
+              child: Text("Cart is empty",style: TextStyle(fontSize: 15),),
             )
           : Column(
               children: [

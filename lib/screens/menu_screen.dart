@@ -19,7 +19,7 @@ class MenuScreen extends StatelessWidget {
       appBar: AppBar(title: Text(category)),
       body: filteredFoods.isEmpty
           ? const Center(
-              child: Text("No menu available", style: TextStyle(fontSize: 16)),
+              child: Text("No menu available", style: TextStyle(fontSize: 15)),
             )
           : GridView.builder(
               padding: const EdgeInsets.all(16),

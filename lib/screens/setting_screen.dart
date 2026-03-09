@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:restaurant_mobile_app/screens/order_screen.dart';
 import '../data/user_data.dart';
 import 'edit_profile_screen.dart';
+import 'address_screen.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
@@ -57,7 +58,12 @@ class SettingScreen extends StatelessWidget {
               context,
               Icons.location_on_outlined,
               "My Address",
-              () {},
+              () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AddressScreen()),
+                );
+              },
             ),
 
             _buildMenuItem(

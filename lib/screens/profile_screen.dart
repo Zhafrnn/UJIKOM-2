@@ -3,6 +3,7 @@ import 'package:restaurant_mobile_app/screens/order_screen.dart';
 import '../data/user_data.dart';
 import 'edit_profile_screen.dart';
 import 'setting_screen.dart';
+import 'address_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -69,7 +70,17 @@ class ProfileScreen extends StatelessWidget {
             const SizedBox(height: 30),
 
             // 🔹 MENU LIST
-            _buildMenuItem(context, Icons.location_on_outlined, "My Address"),
+            _buildMenuItem(
+              context,
+              Icons.location_on_outlined,
+              "My Address",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const AddressScreen()),
+                );
+              },
+            ),
             _buildMenuItem(context, Icons.credit_card, "Payment Methods"),
             _buildMenuItem(
               context,

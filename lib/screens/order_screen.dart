@@ -72,7 +72,7 @@ class _OrderScreenState extends State<OrderScreen> {
                               ],
                             ),
                           );
-                        }).toList(),
+                        }),
 
                         const Divider(),
 

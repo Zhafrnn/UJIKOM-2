@@ -70,7 +70,6 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                   ),
 
-                  // 🔥 Badge Cart
                   if (isCart && cart.totalItems > 0)
                     Positioned(
                       right: -6,
@@ -118,39 +117,46 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body: _pages[_selectedIndex],
 
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [BoxShadow(blurRadius: 10, color: Colors.black12)],
-        ),
-        
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            _buildNavItem(icon: Icons.home_outlined, label: "Home", index: 0),
-            _buildNavItem(
-              icon: Icons.favorite_border,
-              label: "Favorite",
-              index: 1,
-            ),
-            _buildNavItem(
-              icon: Icons.shopping_bag_outlined,
-              label: "Cart",
-              index: 2,
-              isCart: true,
-            ),
-            _buildNavItem(
-              icon: Icons.receipt_long_outlined,
-              label: "Orders",
-              index: 3,
-            ),
-            _buildNavItem(
-              icon: Icons.settings_outlined,
-              label: "Settings",
-              index: 4,
-            ),
-          ],
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                blurRadius: 10,
+                color: Colors.black12,
+                offset: Offset(0, -10),
+              ),
+            ],
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(icon: Icons.home_outlined, label: "Home", index: 0),
+              _buildNavItem(
+                icon: Icons.favorite_border,
+                label: "Favorite",
+                index: 1,
+              ),
+              _buildNavItem(
+                icon: Icons.shopping_bag_outlined,
+                label: "Cart",
+                index: 2,
+                isCart: true,
+              ),
+              _buildNavItem(
+                icon: Icons.receipt_long_outlined,
+                label: "Orders",
+                index: 3,
+              ),
+              _buildNavItem(
+                icon: Icons.settings_outlined,
+                label: "Settings",
+                index: 4,
+              ),
+            ],
+          ),
         ),
       ),
     );

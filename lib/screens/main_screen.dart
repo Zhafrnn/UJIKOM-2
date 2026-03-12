@@ -124,9 +124,9 @@ class _MainScreenState extends State<MainScreen> {
             color: Colors.white,
             boxShadow: [
               BoxShadow(
-                blurRadius: 10,
+                blurRadius: 5,
                 color: Colors.black12,
-                offset: Offset(0, -10),
+                offset: Offset(0, -5),
               ),
             ],
           ),

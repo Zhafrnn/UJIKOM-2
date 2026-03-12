@@ -11,7 +11,7 @@ final List<Map<String, String>> promoList = [
   },
   {
     "title": "Free Drink",
-    "subtitle": "Min order \$25",
+    "subtitle": "Min order \$65",
     "image": "assets/Drink_Promo.jpg",
   },
   {

@@ -44,10 +44,14 @@ class _AddressScreenState extends State<AddressScreen> {
               maxLines: 3,
               decoration: InputDecoration(
                 labelText: "Your Address",
+                labelStyle: TextStyle(color: Colors.black),
                 hintText: user.address == "No address added"
                     ? "No address added"
                     : null,
-                border: const OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.black, width: 2),
+                  borderRadius: BorderRadius.circular(12),
+                )
               ),
             ),
 

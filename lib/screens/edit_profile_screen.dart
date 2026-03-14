@@ -13,14 +13,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
   late TextEditingController _nameController;
   late TextEditingController _emailController;
-  late TextEditingController _phoneController;
 
   @override
   void initState() {
     super.initState();
     _nameController = TextEditingController(text: user.name);
     _emailController = TextEditingController(text: user.email);
-    _phoneController = TextEditingController(text: user.phone);
   }
 
   @override
@@ -88,11 +86,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 validator: (value) =>
                     value == null || value.isEmpty ? "Email required" : null,
               ),
-
-              const SizedBox(height: 16),
-
-              
-
               const SizedBox(height: 30),
 
               SizedBox(

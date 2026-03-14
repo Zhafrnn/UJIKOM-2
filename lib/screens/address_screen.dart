@@ -45,6 +45,7 @@ class _AddressScreenState extends State<AddressScreen> {
   Widget _buildField(
     String label,
     TextEditingController controller, {
+    String? hint,
     int maxLines = 1,
   }) {
     return Padding(
@@ -54,6 +55,7 @@ class _AddressScreenState extends State<AddressScreen> {
         maxLines: maxLines,
         decoration: InputDecoration(
           labelText: label,
+          hintText: hint,
           labelStyle: const TextStyle(color: Colors.black),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black),
@@ -76,17 +78,23 @@ class _AddressScreenState extends State<AddressScreen> {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            _buildField("Address Line", _addressController, maxLines: 3),
+            _buildField(
+              "Address Line",
+              _addressController,
+              hint: "Jl. Mawar No. 10, Blok B",
+              maxLines: 3,
+            ),
 
-            _buildField("City", _cityController),
+            _buildField("City", _cityController, hint: "Bandung"),
 
-            _buildField("Postal Code", _postalController),
+            _buildField("Postal Code", _postalController, hint: "40123"),
 
-            _buildField("Phone Number", _phoneController),
+            _buildField("Phone Number", _phoneController, hint: "08123456789"),
 
             _buildField(
               "Notes for Driver (Optional)",
               _notesController,
+              hint: "Rumah pagar hitam, dekat masjid",
               maxLines: 2,
             ),
 

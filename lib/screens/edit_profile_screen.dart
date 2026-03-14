@@ -91,31 +91,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
 
               const SizedBox(height: 16),
 
-              TextFormField(
-                controller: _phoneController,
-                decoration: InputDecoration(
-                  labelText: "Phone Number",
-                  labelStyle: const TextStyle(color: Colors.black),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.black),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.black, width: 2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  errorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  focusedErrorBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(color: Colors.red, width: 2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                ),
-                validator: (value) =>
-                    value == null || value.isEmpty ? "Phone Number required" : null,
-              ),
+              
 
               const SizedBox(height: 30),
 
@@ -134,7 +110,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       user.updateUser(
                         name: _nameController.text,
                         email: _emailController.text,
-                        phone: _phoneController.text,
                       );
 
                       Navigator.pop(context);

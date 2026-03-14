@@ -4,7 +4,7 @@ class UserModel extends ChangeNotifier {
   String _name = "John Doe";
   String _email = "johndoe@gmail.com";
 
-  String _phone = "08123456789";
+  String _phone = "";
   String _address = "";
   String _city = "";
   String _postalCode = "";

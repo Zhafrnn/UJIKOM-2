@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../data/user_data.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -44,26 +45,30 @@ class _AddressScreenState extends State<AddressScreen> {
 
   Widget _buildField(
     String label,
+    String hint,
     TextEditingController controller, {
-    String? hint,
     int maxLines = 1,
+    TextInputType keyboardType = TextInputType.text,
+    List<TextInputFormatter>? inputFormatters,
   }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: TextField(
         controller: controller,
         maxLines: maxLines,
+        keyboardType: keyboardType,
+        inputFormatters: inputFormatters,
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
           labelStyle: const TextStyle(color: Colors.black),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
           focusedBorder: OutlineInputBorder(
             borderSide: const BorderSide(color: Colors.black, width: 2),
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: BorderRadius.circular(16),
           ),
         ),
       ),
@@ -80,21 +85,33 @@ class _AddressScreenState extends State<AddressScreen> {
           children: [
             _buildField(
               "Address Line",
+              "Example: Jl. Mawar No. 10, Blok B",
               _addressController,
-              hint: "Jl. Mawar No. 10, Blok B",
               maxLines: 3,
             ),
 
-            _buildField("City", _cityController, hint: "Bandung"),
+            _buildField("City", "Example: Bandung", _cityController),
 
-            _buildField("Postal Code", _postalController, hint: "40123"),
+            _buildField(
+              "Postal Code",
+              "Example: 40123",
+              _postalController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            ),
 
-            _buildField("Phone Number", _phoneController, hint: "08123456789"),
+            _buildField(
+              "Phone Number",
+              "Example: 08123456789",
+              _phoneController,
+              keyboardType: TextInputType.number,
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+            ),
 
             _buildField(
               "Notes for Driver (Optional)",
+              "Example: Rumah pagar hitam, dekat masjid",
               _notesController,
-              hint: "Rumah pagar hitam, dekat masjid",
               maxLines: 2,
             ),
 
@@ -106,14 +123,14 @@ class _AddressScreenState extends State<AddressScreen> {
                 onPressed: _saveAddress,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                   ),
                 ),
                 child: const Text(
                   "Save Address",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                 ),
               ),
             ),

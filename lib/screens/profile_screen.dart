@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:restaurant_mobile_app/screens/order_screen.dart';
 import '../data/user_data.dart';
@@ -29,10 +30,19 @@ class ProfileScreen extends StatelessWidget {
               builder: (context, _) {
                 return Column(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 60,
                       backgroundColor: Colors.orange,
-                      child: Icon(Icons.person, size: 60, color: Colors.white),
+                      backgroundImage: user.photoPath != null
+                          ? FileImage(File(user.photoPath!))
+                          : null,
+                      child: user.photoPath == null
+                          ? const Icon(
+                              Icons.person,
+                              size: 60,
+                              color: Colors.white,
+                            )
+                          : null,
                     ),
                     const SizedBox(height: 20),
                     Text(

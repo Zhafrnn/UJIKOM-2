@@ -10,6 +10,8 @@ class UserModel extends ChangeNotifier {
   String _postalCode = "";
   String _notes = "";
 
+  String? _photoPath; // 🔥 FOTO PROFILE
+
   String get name => _name;
   String get email => _email;
 
@@ -18,6 +20,8 @@ class UserModel extends ChangeNotifier {
   String get city => _city;
   String get postalCode => _postalCode;
   String get notes => _notes;
+
+  String? get photoPath => _photoPath; // 🔥 GETTER FOTO
 
   void updateUser({required String name, required String email}) {
     _name = name;
@@ -38,6 +42,12 @@ class UserModel extends ChangeNotifier {
     _phone = phone;
     _notes = notes;
 
+    notifyListeners();
+  }
+
+  // 🔥 UPDATE FOTO PROFILE
+  void updatePhoto(String path) {
+    _photoPath = path;
     notifyListeners();
   }
 }
